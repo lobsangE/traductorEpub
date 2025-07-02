@@ -1,44 +1,66 @@
-# Traductor Automático de ePub con IA (Gemini)
+Traductor Avanzado de ePub con IA (OpenAI)
 
-Este proyecto contiene un script de Python para traducir archivos de formato `.epub` de un idioma a otro de forma completamente automática, utilizando la API de Google Gemini. El script está diseñado para ser flexible, robusto y fácil de usar desde la línea de comandos.
+Este proyecto contiene un script de Python de alto rendimiento para traducir archivos .epub de forma rápida, robusta y automática, utilizando la potente API de OpenAI (GPT-4o).
 
-## Características
+El script ha sido optimizado para manejar libros largos y complejos, asegurando una traducción fluida, preservación del formato original y resiliencia frente a errores de red o interrupciones.
 
-- **Traducción Automática**: Procesa un ePub capítulo por capítulo, enviando el texto a la API de Gemini para su traducción.
-- **Interfaz de Línea de Comandos**: Permite especificar los archivos de entrada y salida como argumentos, haciéndolo fácil de integrar en flujos de trabajo.
-- **Preservación de Estructura**: Mantiene la estructura básica del ePub (capítulos, orden, metadatos) en el archivo traducido.
-- **Prompt de Traducción Personalizable**: Las reglas de traducción se definen en un _prompt_ claro dentro del script, permitiendo ajustar el estilo y las directrices (por ejemplo, traducción literal, manejo de alternativas, etc.).
-- **Manejo Seguro de API Keys**: Utiliza un archivo `.env` para gestionar la API key de forma segura, evitando exponerla en el código fuente.
+✨ Características Principales
 
-## Requisitos
+    🤖 Traducción con OpenAI: Utiliza los modelos más avanzados de OpenAI (gpt-4o) para obtener traducciones de alta calidad.
 
-- Python 3.8 o superior.
-- Una API Key de Google AI (Gemini). Puedes obtenerla en [Google AI Studio](https://aistudio.google.com/app/apikey).
-- Las librerías de Python listadas en el archivo `requirements.txt`.
+    ⚡ Alta Velocidad (Procesamiento Asíncrono): Envía cientos de fragmentos de texto a la API de forma concurrente, reduciendo drásticamente el tiempo total de traducción en comparación con métodos secuenciales.
 
-## Instalación y Configuración
+    🎨 Preservación de Formato HTML: Mantiene intacta toda la maquetación del libro, incluyendo negritas, cursivas, enlaces, listas y otras etiquetas HTML.
 
-1.  **Clonar el repositorio (o descargar los archivos):**
-    ```bash
-    git clone [https://github.com/tu-usuario/tu-repositorio.git](https://github.com/tu-usuario/tu-repositorio.git)
-    cd tu-repositorio
-    ```
+    📦 Procesamiento por Lotes (Batches): Agrupa las solicitudes a la API en lotes para evitar exceder los límites de tasa (rate limits), garantizando un proceso estable y sin errores de cuota.
 
-2.  **Instalar las dependencias:**
-    Se recomienda crear un entorno virtual primero. Luego, instala las librerías necesarias:
-    ```bash
-    pip install -r requirements.txt
-    ```
+    🔄 Reintentos Automáticos: Si una solicitud a la API falla por un problema de red, el script la reintentará automáticamente varias veces antes de marcarla como error.
 
-3.  **Configurar la API Key:**
-    Crea un archivo llamado `.env` en la raíz del proyecto. Este archivo **no** debe ser subido al repositorio. Añade tu API key dentro de él de la siguiente forma:
-    ```
-    GEMINI_API_KEY=TU_API_KEY_AQUI
-    ```
+    💾 Persistencia y Reanudación de Progreso: El script guarda el progreso después de traducir cada capítulo. Si el proceso se interrumpe, puedes volver a ejecutar el mismo comando y continuará exactamente donde se quedó, sin perder trabajo ni gastar créditos de API innecesariamente.
 
-## Modo de Uso
+    🔑 Manejo Seguro de API Keys: Utiliza un archivo .env para gestionar tu clave de API de OpenAI de forma segura, evitando exponerla en el código fuente.
+
+✅ Requisitos
+
+    Python 3.8 o superior.
+
+    Una API Key de OpenAI. Puedes obtenerla en platform.openai.com/api-keys.
+
+    Las librerías de Python listadas en el archivo requirements.txt.
+
+⚙️ Instalación y Configuración
+
+    Clonar el repositorio (o descargar los archivos):
+    Bash
+
+git clone https://github.com/lobsangE/traductorEpub.git
+cd traductorEpub
+
+Instalar las dependencias:
+Se recomienda crear un entorno virtual primero. Luego, instala las librerías necesarias:
+Bash
+
+pip install -r requirements.txt
+
+Configurar la API Key:
+Crea un archivo llamado .env en la raíz del proyecto. Este archivo no debe ser subido al repositorio (.gitignore ya está configurado para ignorarlo). Añade tu clave de API de OpenAI dentro de él de la siguiente forma:
+Fragmento de código
+
+    OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+    Reemplaza sk-xxxxxxxx... con tu clave real.
+
+🚀 Modo de Uso
 
 Una vez configurado, puedes ejecutar el script desde tu terminal. La sintaxis es la siguiente:
+Bash
 
-```bash
 python traductor.py <ruta_del_archivo_de_entrada.epub> <ruta_para_el_archivo_de_salida.epub>
+
+Ejemplo:
+
+Bash
+
+python traductor.py "Alices Adventures in Wonderland.epub" "Alicia en el País de las Maravillas [ES].epub"
+
+El script mostrará el progreso en la consola, informando qué capítulo está procesando, el estado de los lotes de traducción y cuándo guarda el progreso en el disco. Si lo detienes y lo vuelves a ejecutar, verás un mensaje indicando que está reanudando una sesión anterior.
